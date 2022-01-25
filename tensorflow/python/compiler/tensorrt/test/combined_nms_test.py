@@ -77,18 +77,13 @@ class CombinedNmsTest(trt_test.TfTrtIntegrationTestBase):
 
   def ExpectedEnginesToBuild(self, run_params):
     """Return the expected engines to build."""
-    if not run_params.dynamic_shape:
-      return {
-          'TRTEngineOp_0': [
-              'combined_nms/CombinedNonMaxSuppression', 'max_total_size',
-              'iou_threshold', 'score_threshold'
-          ]
-      }
-    else:
-      # The CombinedNMS op is currently not converted in dynamic shape mode.
-      # This branch shall be removed once the converter is updated to handle
-      # input with dynamic shape.
-      return dict()
+    return {
+        'TRTEngineOp_0': [
+            'combined_nms/CombinedNonMaxSuppression',
+            'max_output_size_per_class', 'max_total_size', 'iou_threshold',
+            'score_threshold'
+        ]
+    }
 
   def ShouldRunTest(self, run_params):
     should_run, reason = super().ShouldRunTest(run_params)

@@ -4,8 +4,8 @@ load("//third_party:repo.bzl", "tf_http_archive")
 
 def repo(name = "tensorrt_oss_archive"):
     """Imports TensorRT Open Source Components."""
-    TRT_OSS_COMMIT = "9ec6eb6db39188c9f3d25f49c8ee3a9721636b56"
-    TRT_OSS_SHA256 = "4fa2a712a5f2350b81df01d55c1dc17451e09efd4b2a53322b0433721009e1c7"
+    TRT_OSS_COMMIT = "6f38570b74066ef464744bc789f8512191f1cbc0"
+    TRT_OSS_SHA256 = "3b5f573488e15dc822b3b7b550f7022ca461c241f3f5bd657a80fb949cec2ed6"
 
     tf_http_archive(
         name = name,

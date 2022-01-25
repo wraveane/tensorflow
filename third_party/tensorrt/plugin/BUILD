@@ -9,6 +9,7 @@ cuda_library(
     name = "plugin_common",
     srcs = [
         "plugin/common/kernels/common.cu.cc",
+        "plugin/common/checkMacrosPlugin.cc",
     ],
     hdrs = [
         "plugin/common/bboxUtils.h",

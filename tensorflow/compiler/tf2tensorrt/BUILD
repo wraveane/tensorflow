@@ -862,12 +862,24 @@ tf_cuda_cc_test(
 
 tf_cuda_library(
     name = "trt_plugins",
-    srcs = ["plugin/trt_plugin.cc"],
-    hdrs = ["plugin/trt_plugin.h"],
+    srcs = [
+        "plugin/combinednms_plugin.cc",
+        "plugin/trt_plugin.cc",
+        "plugin/utils.cc",
+    ],
+    hdrs = [
+        "plugin/combinednms_plugin.h",
+        "plugin/trt_plugin.h",
+        "plugin/utils.h",
+    ],
     deps = [
+        ":common_utils",
         "//tensorflow/core:framework_lite",
         "//tensorflow/core:lib_proto_parsing",
-    ] + if_tensorrt([":tensorrt_lib"]),
+    ] + if_tensorrt([":tensorrt_lib"]) + select({
+        ":use_efficient_nms_plugin": [":efficient_nms_plugin"],
+        "//conditions:default": [],
+    }),
 )
 
 cc_library(
