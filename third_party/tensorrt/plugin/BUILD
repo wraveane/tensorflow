@@ -26,6 +26,8 @@ cuda_library(
 cc_library(
     name = "nms_plugin_hdrs",
     hdrs = [
+        "plugin/efficientNMSPlugin/efficientNMSExplicitTFTRTPlugin.h",
+        "plugin/efficientNMSPlugin/efficientNMSImplicitTFTRTPlugin.h",
         "plugin/efficientNMSPlugin/efficientNMSInference.h",
         "plugin/efficientNMSPlugin/efficientNMSParameters.h",
         "plugin/efficientNMSPlugin/efficientNMSPlugin.h",
@@ -35,6 +37,8 @@ cc_library(
 cuda_library(
     name = "nvinfer_plugin_nms",
     srcs = [
+        "plugin/efficientNMSPlugin/efficientNMSExplicitTFTRTPlugin.cpp",
+        "plugin/efficientNMSPlugin/efficientNMSImplicitTFTRTPlugin.cpp",
         "plugin/efficientNMSPlugin/efficientNMSInference.cu.cc",
         "plugin/efficientNMSPlugin/efficientNMSInference.cu.h",
         "plugin/efficientNMSPlugin/efficientNMSInference.h",
@@ -43,6 +47,8 @@ cuda_library(
         "plugin/efficientNMSPlugin/efficientNMSPlugin.h",
     ],
     hdrs = [
+        "plugin/efficientNMSPlugin/efficientNMSExplicitTFTRTPlugin.h",
+        "plugin/efficientNMSPlugin/efficientNMSImplicitTFTRTPlugin.h",
         "plugin/efficientNMSPlugin/efficientNMSInference.h",
         "plugin/efficientNMSPlugin/efficientNMSParameters.h",
         "plugin/efficientNMSPlugin/efficientNMSPlugin.h",

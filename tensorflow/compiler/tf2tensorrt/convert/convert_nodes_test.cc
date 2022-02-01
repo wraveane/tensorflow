@@ -3414,6 +3414,34 @@ TEST_P(OpConverter_FP32_Test, ConvertCombinedNMS) {
           {0, 1},  // exp_classes
           {2},     // exp_num_detections
           Status::OK()},
+      TestParams{
+          "Test 6: bigger batch size",
+          {2, 5, 1, 4},  // boxes dims
+          {2, 5, 1},     // scores dims
+                         // boxes values:
+          {0, 0, 5, 10, 0, 1, 5, 11, 8, 0, 12, 4, 6, 2, 10, 6, 8, 8, 11, 12,
+           1, 1, 6, 11, 1, 2, 6, 12, 9, 1, 13, 5, 7, 3, 11, 7, 9, 9, 12, 13},
+          {5, 4, 3, 2, 1,
+           5, 6, 7, 8, 9},  // scores values
+          4,                // max_output_size_per_class
+          4,                // max_total_size
+          0.1,              // IOU threshold
+          2,                // score threshold
+          false,            // pad_per_class
+          false,            // clip_boxes
+          {{2, 4, 4},       // expected nmsed_boxes_dims
+           {2, 4},          // expected nmsed_scores_dims
+           {2, 4},          // expected_nmsed_classes_dims
+           {2}},            // expected_valid_detections_dims
+                            // exp_boxes_values:
+          {0, 0,  5, 10, 8, 0, 12, 4, 0, 0, 0,  0, 0, 0, 0, 0,
+           9, 9, 12, 13, 7, 3, 11, 7, 1, 2, 6, 12, 0, 0, 0, 0},
+          {5, 3, 0, 0,
+           9, 8, 6, 0},  // exp_scores
+          {0, 0, 0, 0,
+           0, 0, 0, 0},  // exp_classes
+          {2, 3},        // exp_num_detections
+          Status::OK()},
   };
 
   for (auto p : params) {

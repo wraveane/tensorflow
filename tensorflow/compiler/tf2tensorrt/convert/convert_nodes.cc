@@ -71,7 +71,6 @@ limitations under the License.
 #if GOOGLE_CUDA && GOOGLE_TENSORRT
 #include "third_party/tensorrt/NvInfer.h"
 #include "third_party/tensorrt/NvInferPlugin.h"
-#include "tensorflow/compiler/tf2tensorrt/plugin/combinednms_plugin.h"
 #include "tensorflow/compiler/tf2tensorrt/plugin/utils.h"
 
 // Check if the types are equal. Cast to int first so that failure log message
@@ -6051,7 +6050,7 @@ Status ConvertCombinedNMS(OpConverterParams* params) {
       boxes_dims.d[class_idx] == 1 || boxes_dims.d[class_idx] == num_classes;
   if (!box_check) {
     return errors::InvalidArgument(
-        "NMS TRT Plugin third dimension of boxes must be either 1 "
+        "NMS TRT Plugin third dimension of boxes must be either 1 or num_classes"
         "or match the num_classes dimension of scores ",
         node_def.name());
   }
@@ -6107,7 +6106,7 @@ Status ConvertCombinedNMS(OpConverterParams* params) {
   nvinfer1::PluginFieldCollection fc{6, fields};
 
   auto creator = GetPluginCreator(params->use_implicit_batch ?
-      "CombinedNMS_Implicit_Plugin" : "CombinedNMS_Plugin", "1");
+      "EfficientNMS_Implicit_TF_TRT" : "EfficientNMS_Explicit_TF_TRT", "1");
   TFTRT_RETURN_ERROR_IF_NULLPTR(creator, node_def.name());
 
   TrtUniquePtrType<nvinfer1::IPluginV2> plugin(

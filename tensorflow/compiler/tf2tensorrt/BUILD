@@ -863,12 +863,10 @@ tf_cuda_cc_test(
 tf_cuda_library(
     name = "trt_plugins",
     srcs = [
-        "plugin/combinednms_plugin.cc",
         "plugin/trt_plugin.cc",
         "plugin/utils.cc",
     ],
     hdrs = [
-        "plugin/combinednms_plugin.h",
         "plugin/trt_plugin.h",
         "plugin/utils.h",
     ],
