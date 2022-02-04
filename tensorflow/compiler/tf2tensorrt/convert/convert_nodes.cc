@@ -6029,9 +6029,11 @@ Status ConvertCombinedNMS(OpConverterParams* params) {
   const float score_thresh = *(score_threshold.GetPointer<float>());
 
   AttrSlice attrs(node_def);
-  bool clip_boxes = false, pad_per_class = false;
-  TF_RETURN_IF_ERROR(GetNodeAttr(attrs, "clip_boxes", &clip_boxes));
-  TF_RETURN_IF_ERROR(GetNodeAttr(attrs, "pad_per_class", &pad_per_class));
+  bool clip_boxes_bool = false, pad_per_class_bool = false;
+  TF_RETURN_IF_ERROR(GetNodeAttr(attrs, "clip_boxes", &clip_boxes_bool));
+  TF_RETURN_IF_ERROR(GetNodeAttr(attrs, "pad_per_class", &pad_per_class_bool));
+  int pad_per_class = pad_per_class_bool;
+  int clip_boxes = clip_boxes_bool;
 
   // Validate tensors and weights
   const int implicit_batch_offset = params->use_implicit_batch ? 0 : 1;

@@ -23,8 +23,8 @@ limitations under the License.
 #include "absl/base/call_once.h"
 #include "absl/strings/str_join.h"
 #include "third_party/tensorrt/NvInferPlugin.h"
-#include "third_party/tensorrt/plugin/efficientNMSPlugin/efficientNMSExplicitTFTRTPlugin.h"
-#include "third_party/tensorrt/plugin/efficientNMSPlugin/efficientNMSImplicitTFTRTPlugin.h"
+#include "third_party/tensorrt/plugin/efficientNMSPlugin/tftrt/efficientNMSExplicitTFTRTPlugin.h"
+#include "third_party/tensorrt/plugin/efficientNMSPlugin/tftrt/efficientNMSImplicitTFTRTPlugin.h"
 #endif
 
 #if GOOGLE_CUDA && GOOGLE_TENSORRT

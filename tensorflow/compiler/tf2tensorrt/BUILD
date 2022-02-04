@@ -870,6 +870,10 @@ tf_cuda_library(
         "plugin/trt_plugin.h",
         "plugin/utils.h",
     ],
+    copts = tf_copts() + select({
+        ":use_efficient_nms_plugin": ["-DTF_TRT_USE_EFFICIENT_NMS_PLUGIN=1"],
+        "//conditions:default": [],
+    }),
     deps = [
         ":common_utils",
         "//tensorflow/core:framework_lite",
